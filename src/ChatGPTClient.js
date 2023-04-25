@@ -6,6 +6,7 @@ import { fetchEventSource } from '@waylaidwanderer/fetch-event-source';
 import { Agent, ProxyAgent } from 'undici';
 
 const CHATGPT_MODEL = 'gpt-3.5-turbo';
+// const CHATGPT_MODEL = 'gpt-4';
 
 const tokenizersCache = {};
 
@@ -115,6 +116,8 @@ export default class ChatGPTClient {
 
         if (this.options.reverseProxyUrl) {
             this.completionsUrl = this.options.reverseProxyUrl;
+        } else if (!this.options.completionsUrl) {
+            this.completionsUrl = this.options.completionsUrl;
         } else if (isChatGptModel) {
             this.completionsUrl = 'https://api.openai.com/v1/chat/completions';
         } else {
